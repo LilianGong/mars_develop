@@ -44,27 +44,19 @@ def get_entites():
 
 
 
-# @app.after_request
-# def after(response):
-#     # todo with response
-#     print(response.status)
-#     print(response.headers)
-#     print(response.get_json())
-#     return response
-
-
 @app.route('/getDefinition',methods=['POST'])
 @cross_origin()
 def get_eng_def():
     ent_ls= get_text()['chn']
-    result = []
+    eng_ent_ls = get_text()['eng']
+    result = {}
     unlisted = []
-    for ent in ent_ls:
-        res = baike_df[baike_df['entity']==ent]
+    for i in range(len(ent_ls)):
+        res = baike_df[baike_df['entity']==ent_ls[i]]
         if len(res)==0:
-            unlisted.append(ent)
+            unlisted.append(ent_ls[i])
         else:
-            result.append({ent:t.translate(res['_def'].values[0]).text})
+            result[eng_ent_ls[i]]=t.translate(res['_def'].values[0],dest='en').text
     print(result)
     return jsonify({"unlisted":unlisted,"result":result})
 

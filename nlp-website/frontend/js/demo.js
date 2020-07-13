@@ -64,13 +64,12 @@ $(document).ready(function () {
       dataType: "json",
       data: JSON.stringify(entity),
     }).done(function (data) {
-      var dat = data["result"];
-      for (i = 0; i < dat.length; i++) {
-        btn = get_button(entity["eng"][i]);
+      var res = data["result"];
+      for (var key in res) {
+        btn = get_button(key);
         btn.onclick = function () {
-          console.log(entity["chn"]);
-          alert(entity["chn"]);
-          $("#def").html(dat[i][entity["chn"][i]]);
+          $("#def").html(res[key]);
+          document.body.removeChild(btn);
         };
         // var btn = document.createElement("BUTTON");
         // btn.innerHTML = "enter the definition of ".concat(entity["eng"][i]);
