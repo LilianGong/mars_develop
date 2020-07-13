@@ -1,28 +1,12 @@
 $(document).ready(function () {
-  //This function called when the button is clicked
-
   function compareString(s1, s2, splitChar) {
     if (typeof splitChar == "undefined") {
       splitChar = " ";
     }
-    var string1 = new Array();
-    var string2 = new Array();
+    var string1 = new Set(s1.split(splitChar));
+    var string2 = new Set(s2.split(splitChar));
 
-    string1 = s1.split(splitChar);
-    string2 = s2.split(splitChar);
-    var diff = new Array();
-
-    if (s1.length > s2.length) {
-      var long = string1;
-    } else {
-      var long = string2;
-    }
-    for (x = 0; x < long.length; x++) {
-      if (string1[x] != string2[x]) {
-        diff.push(string2[x]);
-      }
-    }
-
+    var diff = new Set([...string1].filter((x) => !string2.has(x)));
     return diff;
   }
 
@@ -37,10 +21,11 @@ $(document).ready(function () {
     }
     if (currentVal.split(" ").length != oldVal.split(" ").length) {
       var txt = $("#note").val();
-      // var d = compareString(currentVal.split(), oldVal).join(" ");
-      get_entity(txt);
+      // var d = currentVal.localeCompare(oldVal);
+      var diff = [...compareString(currentVal, oldVal)].join(" ");
+      get_entity(diff);
+      oldVal = currentVal;
     }
-    oldVal = currentVal;
   });
   //   });
 
@@ -68,7 +53,7 @@ $(document).ready(function () {
       for (var key in res) {
         btn = get_button(key);
         btn.onclick = function () {
-          $("#def").html(res[key]);
+          show_def(res[key]);
           document.body.removeChild(btn);
         };
         // var btn = document.createElement("BUTTON");
@@ -87,5 +72,11 @@ $(document).ready(function () {
     btn.innerHTML = "enter the definition of ".concat(ent);
     document.body.appendChild(btn);
     return btn;
+  }
+
+  function show_def(def) {
+    var box = document.createElement("BOX");
+    box.innerHTML = def;
+    document.body.appendChild(box);
   }
 });
