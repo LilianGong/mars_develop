@@ -1,15 +1,4 @@
 $(document).ready(function () {
-  function compareString(s1, s2, splitChar) {
-    if (typeof splitChar == "undefined") {
-      splitChar = " ";
-    }
-    var string1 = new Set(s1.split(splitChar));
-    var string2 = new Set(s2.split(splitChar));
-
-    var diff = new Set([...string1].filter((x) => !string2.has(x)));
-    return diff;
-  }
-
   var oldVal = "";
   $("#note").on("change keyup paste", function () {
     //   $("#btn").click(function () {
@@ -28,6 +17,17 @@ $(document).ready(function () {
     }
   });
   //   });
+
+  function compareString(s1, s2, splitChar) {
+    if (typeof splitChar == "undefined") {
+      splitChar = " ";
+    }
+    var string1 = new Set(s1.split(splitChar));
+    var string2 = new Set(s2.split(splitChar));
+
+    var diff = new Set([...string1].filter((x) => !string2.has(x)));
+    return diff;
+  }
 
   function get_entity(txt) {
     $.ajax({
@@ -55,6 +55,7 @@ $(document).ready(function () {
         btn.onclick = function () {
           show_def(res[key]);
           document.body.removeChild(btn);
+          next_textarea();
         };
         // var btn = document.createElement("BUTTON");
         // btn.innerHTML = "enter the definition of ".concat(entity["eng"][i]);
@@ -78,5 +79,12 @@ $(document).ready(function () {
     var box = document.createElement("BOX");
     box.innerHTML = def;
     document.body.appendChild(box);
+  }
+
+  function next_textarea() {
+    var txt = document.createElement("TEXTAREA");
+    document.body.appendChild(txt);
+    txt.id = "newtextarea";
+    $("#newtextarea").focus();
   }
 });
