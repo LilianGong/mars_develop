@@ -1,12 +1,9 @@
 $(document).ready(function () {
   var oldVal = "";
-  $("#note").on("change keyup paste", function () {
-    //   $("#btn").click(function () {
-    // val() method is used to get the values from
-    // textarea and stored in txt variable
+  $(".currentnote").on("change keyup paste", function ner_detection() {
     var currentVal = $(this).val();
     if (currentVal == oldVal) {
-      return; //check to prevent multiple simultaneous triggers
+      return;
     }
     if (currentVal.split(" ").length != oldVal.split(" ").length) {
       var txt = $("#note").val();
@@ -16,7 +13,6 @@ $(document).ready(function () {
       oldVal = currentVal;
     }
   });
-  //   });
 
   function compareString(s1, s2, splitChar) {
     if (typeof splitChar == "undefined") {
@@ -55,12 +51,11 @@ $(document).ready(function () {
         btn.onclick = function () {
           show_def(res[key]);
           document.body.removeChild(btn);
-          next_textarea();
+          var txt = next_textarea();
+          $(".currentnote").on("change keyup paste", function () {
+            ner_detection();
+          });
         };
-        // var btn = document.createElement("BUTTON");
-        // btn.innerHTML = "enter the definition of ".concat(entity["eng"][i]);
-        // document.body.appendChild(btn);
-        // // $("#entity").html("enter the definition of ".concat(data["eng"]));
       }
 
       console.log(data);
@@ -84,7 +79,11 @@ $(document).ready(function () {
   function next_textarea() {
     var txt = document.createElement("TEXTAREA");
     document.body.appendChild(txt);
-    txt.id = "newtextarea";
-    $("#newtextarea").focus();
+    txt.class = "currentnote";
+    txt.id = "currentn";
+    txt.rows = 1;
+    txt.cols = 30;
+    $("#currentn").focus();
+    return txt;
   }
 });
