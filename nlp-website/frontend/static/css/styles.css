@@ -1,0 +1,84 @@
+@import url(https://fonts.googleapis.com/css?family=Open + Sans);
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Helvetica";
+  background: #ffffff;
+  color: black;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 1.4px;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.pic {
+  width: 100%;
+  height: auto;
+}
+
+.notes {
+  background-color: white;
+  color: black;
+  position: absolute;
+  width: 18.5%;
+  height: 2.6%;
+  right: 13.5%;
+  bottom: 74.9%;
+  border: none;
+}
+
+.entitybtn {
+  background-color: #f3f3f3;
+  color: black;
+  position: absolute;
+  width: 14.5%;
+  height: 2.2%;
+  right: 17.5%;
+  bottom: 73.5%;
+  border: none;
+}
+
+.defbox {
+  color: black;
+  position: absolute;
+  width: 18.5%;
+  height: 2.6%;
+  right: 13.5%;
+  bottom: 70.9%;
+  font-size: 11px;
+  font-stretch: normal;
+  text-align: left;
+}
+
+/* input {
+  width: 100%;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 13px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2),
+    0 1px 1px rgba(255, 255, 255, 0.2);
+  -webkit-transition: box-shadow 0.5s ease;
+  -moz-transition: box-shadow 0.5s ease;
+  -o-transition: box-shadow 0.5s ease;
+  -ms-transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+} */

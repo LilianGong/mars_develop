@@ -1,12 +1,11 @@
 $(document).ready(function () {
   var oldVal = "";
-  $(".currentnote").on("change keyup paste", function ner_detection() {
+  $(".notes").on("change keyup paste", function ner_detection() {
     var currentVal = $(this).val();
     if (currentVal == oldVal) {
       return;
     }
     if (currentVal.split(" ").length != oldVal.split(" ").length) {
-      var txt = $("#note").val();
       // var d = currentVal.localeCompare(oldVal);
       var diff = [...compareString(currentVal, oldVal)].join(" ");
       get_entity(diff);
@@ -50,11 +49,8 @@ $(document).ready(function () {
         btn = get_button(key);
         btn.onclick = function () {
           show_def(res[key]);
-          document.body.removeChild(btn);
+          document.getElementById("container").removeChild(btn);
           var txt = next_textarea();
-          $(".currentnote").on("change keyup paste", function () {
-            ner_detection();
-          });
         };
       }
 
@@ -66,24 +62,27 @@ $(document).ready(function () {
   function get_button(ent) {
     var btn = document.createElement("BUTTON");
     btn.innerHTML = "enter the definition of ".concat(ent);
-    document.body.appendChild(btn);
+    document.getElementById("container").appendChild(btn);
+    btn.classList.add("entitybtn");
+    btn.id = "entitybtn";
     return btn;
   }
 
   function show_def(def) {
     var box = document.createElement("BOX");
     box.innerHTML = def;
-    document.body.appendChild(box);
+    document.getElementById("container").appendChild(box);
+    box.classList.add("defbox");
   }
 
   function next_textarea() {
     var txt = document.createElement("TEXTAREA");
-    document.body.appendChild(txt);
-    txt.class = "currentnote";
-    txt.id = "currentn";
+    document.getElementById("container").appendChild(txt);
+    txt.classList.add("notes");
+    txt.id = "note";
     txt.rows = 1;
     txt.cols = 30;
-    $("#currentn").focus();
+    $("#note").focus();
     return txt;
   }
 });
