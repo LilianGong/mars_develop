@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var oldVal = "";
+  $(".notes").focus();
   $(".notes").on("change keyup paste", function ner_detection() {
     var currentVal = $(this).val();
     if (currentVal == oldVal) {
@@ -78,7 +79,7 @@ $(document).ready(function () {
   function next_textarea() {
     var txt = document.createElement("TEXTAREA");
     document.getElementById("container").appendChild(txt);
-    txt.classList.add("notes");
+    txt.classList.add("next_notes");
     txt.id = "note";
     txt.rows = 1;
     txt.cols = 30;

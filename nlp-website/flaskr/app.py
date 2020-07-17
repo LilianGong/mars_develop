@@ -15,8 +15,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 t = Translator()
 ckpt_file,_model,saver,sess = build_model()
-baike_df = pd.read_csv('/Users/liliangong/workspace_lil/mars_develop/agg_data/baike_w_eng.csv')
-baike_df[baike_df['_def']!=None]
+
+baike_df = pd.read_csv('/Users/liliangong/workspace_lil/mars_develop/agg_data/baike_w_eng_v2.csv')
+baike_df[baike_df['eng_def']!=None]
 
 
 def get_text():
@@ -56,7 +57,7 @@ def get_eng_def():
         if len(res)==0:
             unlisted.append(ent_ls[i])
         else:
-            result[eng_ent_ls[i]]=t.translate(res['_def'].values[0],dest='en').text
+            result[eng_ent_ls[i]]=res['eng_def'].values[0],
     print(result)
     return jsonify({"unlisted":unlisted,"result":result})
 

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open + Sans);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 
 html {
   width: 100%;
@@ -9,12 +9,12 @@ html {
 body {
   width: 100%;
   height: 100%;
-  font-family: "Helvetica";
   background: #ffffff;
   color: black;
   font-size: 24px;
   text-align: center;
   letter-spacing: 1.4px;
+  font-family: "Roboto";
 }
 
 .container {
@@ -37,6 +37,27 @@ body {
   right: 13.5%;
   bottom: 74.9%;
   border: none;
+  font-family: "Roboto";
+  outline: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  overflow: auto;
+}
+
+.next_notes {
+  background-color: white;
+  color: black;
+  position: absolute;
+  width: 18.5%;
+  height: 2.6%;
+  right: 13.5%;
+  bottom: 62.5%;
+  border: none;
+  font-family: "Roboto";
+  outline: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  overflow: auto;
 }
 
 .entitybtn {
@@ -48,16 +69,19 @@ body {
   right: 17.5%;
   bottom: 73.5%;
   border: none;
+  font-family: "Roboto";
 }
 
 .defbox {
+  background-color: white;
   color: black;
   position: absolute;
-  width: 18.5%;
-  height: 2.6%;
+  width: 18.9%;
+  height: 12.6%;
   right: 13.5%;
-  bottom: 70.9%;
+  bottom: 63.5%;
   font-size: 11px;
+  font-family: "Roboto";
   font-stretch: normal;
   text-align: left;
 }
