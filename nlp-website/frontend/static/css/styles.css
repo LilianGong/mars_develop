@@ -32,30 +32,32 @@ body {
   background-color: white;
   color: black;
   position: absolute;
-  width: 18.5%;
+  width: 21.5%;
   height: 2.6%;
-  right: 13.5%;
-  bottom: 74.9%;
+  right: 7.2%;
+  bottom: 59%;
   border: none;
   font-family: "Roboto";
   outline: none;
   -moz-box-shadow: none;
   box-shadow: none;
   overflow: auto;
+  font-size: 14px;
 }
 
 .next_notes {
   background-color: white;
   color: black;
   position: absolute;
-  width: 18.5%;
+  width: 21.5%;
   height: 2.6%;
-  right: 13.5%;
-  bottom: 62.5%;
+  right: 7.1%;
+  bottom: 38.5%;
   border: none;
   font-family: "Roboto";
   outline: none;
   -moz-box-shadow: none;
+  font-size: 14px;
   box-shadow: none;
   overflow: auto;
 }
@@ -64,11 +66,12 @@ body {
   background-color: #f3f3f3;
   color: black;
   position: absolute;
-  width: 14.5%;
+  width: 20%;
   height: 2.2%;
-  right: 17.5%;
-  bottom: 73.5%;
+  right: 9.5%;
+  bottom: 56.5%;
   border: none;
+  font-size: 14px;
   font-family: "Roboto";
 }
 
@@ -76,11 +79,11 @@ body {
   background-color: white;
   color: black;
   position: absolute;
-  width: 18.9%;
-  height: 12.6%;
-  right: 13.5%;
-  bottom: 63.5%;
-  font-size: 11px;
+  width: 21.9%;
+  height: 21.6%;
+  right: 7.1%;
+  bottom: 37.5%;
+  font-size: 14px;
   font-family: "Roboto";
   font-stretch: normal;
   text-align: left;
