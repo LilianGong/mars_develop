@@ -23,23 +23,24 @@
       rel="stylesheet"
       type="text/css"
     />
-    <!-- <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='../static/css/style.css') }}"
-    /> -->
     <link rel="stylesheet" href="css/styles.css" />
   </head>
 
   <body style="background: #ffff;">
-    <div class="container" id="container">
-      <textarea
-        class="notes"
-        name="notes"
-        rows="1"
-        cols="30"
-        placeholder="insert your note here"
-      ></textarea>
-      <img src="mars.png" alt="mars webpage" class="pic" />
+    <img src="heading.png" alt="mars webpage" class="head" />
+    <div class="img_container" ,id="img_container">
+      <img src="question.png" alt="mars webpage" class="pic" />
+      <div class="container" id="container">
+        <div class="btn_container" id="btn_container">
+          <textarea
+            class="notes"
+            name="notes"
+            rows="1"
+            cols="20"
+            placeholder="insert your note here"
+          ></textarea>
+        </div>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="../js/demo.js"></script>
