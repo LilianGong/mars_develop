@@ -51,6 +51,10 @@ $(document).ready(function () {
         btn.onclick = function () {
           show_def(res[key]);
           document.getElementById("btn_container").removeChild(btn);
+          var tbn_container = document.createElement("div");
+          tbn_container.classList.add("btn_container");
+          tbn_container.id = "tbn_container";
+          document.getElementById("container").appendChild(tbn_container);
           var txt = next_textarea();
           at_teacher();
         };
@@ -79,11 +83,11 @@ $(document).ready(function () {
 
   function next_textarea() {
     var txt = document.createElement("TEXTAREA");
-    document.getElementById("container").appendChild(txt);
+    document.getElementById("tbn_container").appendChild(txt);
     txt.classList.add("next_notes");
     txt.id = "note";
     txt.rows = 1;
-    txt.cols = 30;
+    txt.cols = 15;
     $("#note").focus();
     return txt;
   }
@@ -98,14 +102,14 @@ $(document).ready(function () {
       if (currentVal.includes("@")) {
         btn = get_teacher_btn();
         btn.onclick = function () {
-          document.getElementById("container").removeChild(btn);
+          document.getElementById("tbn_container").removeChild(btn);
           show_at_teacher();
           var txt = document.createElement("TEXTAREA");
           document.getElementById("container").appendChild(txt);
           txt.classList.add("next_notes");
           txt.id = "note_2";
           txt.rows = 1;
-          txt.cols = 30;
+          txt.cols = 20;
           $("#note_2").focus();
         };
         oldVal = currentVal;
@@ -115,8 +119,8 @@ $(document).ready(function () {
 
   function get_teacher_btn() {
     var btn = document.createElement("BUTTON");
-    btn.innerHTML = "Prof. Wang";
-    document.getElementById("container").appendChild(btn);
+    btn.innerHTML = "Professor Wang";
+    document.getElementById("tbn_container").appendChild(btn);
     btn.classList.add("entitybtn");
     btn.id = "teacherbtn";
     return btn;
@@ -125,7 +129,7 @@ $(document).ready(function () {
   function show_at_teacher() {
     var text = $("#note").val();
     var note = document.getElementById("note");
-    note.value = text.concat(" Prof. Wang");
+    note.value = text.concat(" Professor Wang");
     note.style.color = "#be5683";
   }
 });

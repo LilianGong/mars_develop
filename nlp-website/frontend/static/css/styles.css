@@ -29,13 +29,61 @@ body {
   flex-direction: row;
 }
 
-.pic {
-  /* position: relative; */
+.question {
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
   width: 69%;
 }
 
+.pic {
+  position: relative;
+  width: 90%;
+  padding: 2%;
+}
+
+.q_detail {
+  position: relative;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  border: 1px solid black;
+  padding-right: 2%;
+  padding-left: 2%;
+}
+
+.prob {
+  background-color: white;
+  color: black;
+  width: 100%;
+  font-family: "Roboto";
+  font-size: 18px;
+  text-align: left;
+}
+
+.graph {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.answer {
+  width: 90%;
+}
+
+.explain {
+  background-color: white;
+  color: black;
+  width: 100%;
+  font-family: "Roboto";
+  font-size: 18px;
+  text-align: left;
+}
+
 .container {
-  width: 20%;
+  width: 23.5%;
   height: 800px;
   position: relative;
   display: flex;
@@ -49,7 +97,7 @@ body {
 
 .btn_container {
   position: relative;
-  padding-top: 20%;
+  /* padding-top: 20%; */
   display: flex;
   flex-direction: row;
   text-align: center;
@@ -69,7 +117,7 @@ body {
   box-shadow: none;
   overflow: auto;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1;
 }
 
 .entitybtn {
@@ -81,6 +129,7 @@ body {
   border: none;
   font-size: 14px;
   font-family: "Roboto";
+  width: 70%;
 }
 
 .entitybtn:hover {
@@ -110,15 +159,14 @@ a {
 }
 
 .next_notes {
-  white-space: pre;
+  width: 100%;
   border: none;
   resize: none;
   background-color: white;
   color: black;
-  /* margin: 5px; */
-  border: none;
   font-family: "Roboto";
   outline: none;
   font-size: 14px;
-  line-height: 2;
+  line-height: 3;
+  padding: 0px;
 }
