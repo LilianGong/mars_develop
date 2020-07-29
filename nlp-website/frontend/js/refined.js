@@ -45,8 +45,8 @@ $(document).ready(function () {
   function get_highlight_btn(x, y) {
     var btn = document.createElement("BUTTON");
     btn.innerHTML = "add highlight";
-    c = document.getElementById("problem");
-    c.appendChild(btn);
+    // c = document.getElementById("problem");
+    // c.appendChild(btn);
     btn.classList.add("entitybtn");
     btn.id = "highlightbtn";
     btn.style.position = "relative";
