@@ -13,10 +13,7 @@ $(document).ready(function () {
   }
 
   text = document.getElementById("problem");
-  var position = text.getBoundingClientRect();
-  var px = position.left;
-  var py = position.top;
-
+  h_count = 0;
   text.addEventListener("mouseup", function () {
     highlighting();
     // text.removeEventListener("mouseup", arguments.callee);
@@ -32,64 +29,147 @@ $(document).ready(function () {
       var y = 0;
       text.addEventListener("mousemove", function () {
         if ((x == 0) & (y == 0)) {
-          x = event.pageX - px - 15;
-          y = event.pageY - py + 20;
-          console.log(x - px);
-          console.log(y - py);
+          var position = text.getBoundingClientRect();
+          var px = position.left;
+          var py = position.top;
+          x = event.pageX - px - 100;
+          y = event.pageY - py + 14;
           text.removeEventListener("mousermove", arguments.callee);
-          btn = get_highlight_btn(x, y);
-          btn.onclick = function () {
-            highlight(selectedText);
-            c = document.getElementById("htext");
-            c.removeChild(btn);
-          };
+          hcbtn = get_highlight_btn(x, y);
+          get_highlight(selectedText, hcbtn[0]);
+          get_highlight(selectedText, hcbtn[1]);
+          get_highlight(selectedText, hcbtn[2]);
+          get_highlight(selectedText, hcbtn[3]);
+          show_note_area(selectedText, hcbtn[4], y);
         }
       });
     }
   }
 
-  function get_highlight_btn(x, y) {
-    var btn = document.createElement("BUTTON");
-    btn.innerHTML = "highlight";
-    c = document.getElementById("htext");
-    c.appendChild(btn);
-    btn.id = "highlightbtn";
-    console.log(x);
-    console.log(y);
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
-    return btn;
+  function get_highlight(selectedText, button) {
+    button.onclick = function () {
+      highlight(selectedText, button);
+      c = document.getElementById("htext");
+      c.removeChild(hcbtn[5]);
+    };
   }
 
-  function highlight(text) {
+  function get_highlight_btn(x, y) {
+    var div = document.createElement("BOX");
+    document.getElementById("htext").append(div);
+    div.classList.add("hbtn_box");
+    div.id = "hbtn_box";
+
+    // yellow button
+    var ybtn = document.createElement("BUTTON");
+    div.appendChild(ybtn);
+    ybtn.id = "yellow_btn";
+    ybtn.classList.add("highlightbtn");
+
+    // blue button
+    var bbtn = document.createElement("BUTTON");
+    div.appendChild(bbtn);
+    bbtn.id = "blue_btn";
+    bbtn.classList.add("highlightbtn");
+
+    // red button
+    var rbtn = document.createElement("BUTTON");
+    div.appendChild(rbtn);
+    rbtn.id = "red_btn";
+    rbtn.classList.add("highlightbtn");
+
+    // green button
+    var gbtn = document.createElement("BUTTON");
+    div.appendChild(gbtn);
+    gbtn.id = "green_btn";
+    gbtn.classList.add("highlightbtn");
+
+    //  comment button
+    var cbtn = document.createElement("BUTTON");
+    div.appendChild(cbtn);
+    cbtn.id = "comment_btn";
+    cbtn.classList.add("commentbtn");
+
+    console.log(x);
+    console.log(y);
+    div.style.left = x + "px";
+    div.style.top = y + "px";
+    hcbtn = [ybtn, bbtn, rbtn, gbtn, cbtn, div];
+    return hcbtn;
+  }
+
+  function highlight(text, elm) {
     var inputText = document.getElementById("problem");
     var innerHTML = inputText.innerHTML;
     var index = innerHTML.indexOf(text);
     if (index >= 0) {
+      _id = "hlight".concat(h_count.toString());
+      h_count += 1;
+      var css = "<span class='highlight' id = ".concat(_id, ">");
       innerHTML =
         innerHTML.substring(0, index) +
-        "<span class='highlight'>" +
+        css +
         innerHTML.substring(index, index + text.length) +
         "</span>" +
         innerHTML.substring(index + text.length);
       inputText.innerHTML = innerHTML;
+      var color = getComputedStyle(elm).backgroundColor;
+      console.log(color);
+      document.getElementById(_id).style.backgroundColor = color;
+      document.getElementById(_id).style.opacity = "0.5";
     }
   }
 
-  var oldVal = "";
-  $(".notes").focus();
-  $(".notes").on("change keyup paste", function ner_detection() {
-    var currentVal = $(this).val();
-    if (currentVal == oldVal) {
-      return;
-    }
-    if (currentVal.split(" ").length != oldVal.split(" ").length) {
-      // var d = currentVal.localeCompare(oldVal);
-      var diff = [...compareString(currentVal, oldVal)].join(" ");
-      get_entity(diff);
-      oldVal = currentVal;
-    }
-  });
+  n_count = 0;
+
+  function autosize() {
+    var el = this;
+    setTimeout(function () {
+      el.style.cssText = "height:auto; padding:0";
+      el.style.cssText = "height:" + el.scrollHeight + "px";
+    }, 0);
+  }
+
+  function show_note_area(text, button, y) {
+    button.onclick = function () {
+      var div = document.createElement("div");
+      div.classList.add("btn_container");
+      div.id = "btn_container".concat(n_count.toString());
+      document.getElementById("container").appendChild(div);
+      div.style.top = y + "px";
+      n_count += 1;
+
+      var note = document.createElement("textarea");
+      var parent = "btn_container".concat((n_count - 1).toString());
+      document.getElementById(parent).append(note);
+      note.classList.add("notes");
+      note.id = "notes".concat((n_count - 1).toString());
+      note.placeholder = "Type your thoughts about it...";
+      var oldVal = "";
+      c = document.getElementById("htext");
+      c.removeChild(hcbtn[5]);
+      highlight(text, hcbtn[0]);
+
+      $(".notes").focus();
+      var note = document.getElementById(
+        "notes".concat((n_count - 1).toString())
+      );
+      note.addEventListener("keydown", autosize);
+
+      $(".notes").on("change keyup paste", function ner_detection() {
+        var currentVal = $(this).val();
+        if (currentVal == oldVal) {
+          return;
+        }
+        if (currentVal.split(" ").length != oldVal.split(" ").length) {
+          // var d = currentVal.localeCompare(oldVal);
+          var diff = [...compareString(currentVal, oldVal)].join(" ");
+          get_entity(diff);
+          oldVal = currentVal;
+        }
+      });
+    };
+  }
 
   function compareString(s1, s2, splitChar) {
     if (typeof splitChar == "undefined") {
@@ -127,7 +207,8 @@ $(document).ready(function () {
         btn = get_button(key);
         btn.onclick = function () {
           show_def(res[key]);
-          document.getElementById("btn_container").removeChild(btn);
+          btn.parentNode.removeChild(btn);
+          // document.getElementById("btn_container").removeChild(btn);
           var tbn_container = document.createElement("div");
           tbn_container.classList.add("btn_container");
           tbn_container.id = "tbn_container";
@@ -145,7 +226,8 @@ $(document).ready(function () {
   function get_button(ent) {
     var btn = document.createElement("BUTTON");
     btn.innerHTML = "enter the definition of ".concat(ent);
-    document.getElementById("btn_container").appendChild(btn);
+    var parent = "btn_container".concat((n_count - 1).toString());
+    document.getElementById(parent).appendChild(btn);
     btn.classList.add("entitybtn");
     btn.id = "entitybtn";
     return btn;
@@ -166,6 +248,7 @@ $(document).ready(function () {
     txt.rows = 1;
     txt.cols = 15;
     $("#note").focus();
+    txt.addEventListener("keydown", autosize);
     return txt;
   }
 
@@ -183,11 +266,12 @@ $(document).ready(function () {
           show_at_teacher();
           var txt = document.createElement("TEXTAREA");
           document.getElementById("container").appendChild(txt);
-          txt.classList.add("next_notes");
+          // txt.classList.add("next_notes");
           txt.id = "note_2";
           txt.rows = 1;
           txt.cols = 20;
           $("#note_2").focus();
+          txt.addEventListener("keydown", autosize);
         };
         oldVal = currentVal;
       }
@@ -207,6 +291,6 @@ $(document).ready(function () {
     var text = $("#note").val();
     var note = document.getElementById("note");
     note.value = text.concat(" Professor Wang");
-    note.style.color = "#be5683";
+    note.style.color = "#5b70e7";
   }
 });
