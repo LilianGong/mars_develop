@@ -1,4 +1,76 @@
 $(document).ready(function () {
+  function getSelectedText() {
+    var text = "";
+    if (typeof window.getSelection != "undefined") {
+      text = window.getSelection().toString();
+    } else if (
+      typeof document.selection != "undefined" &&
+      document.selection.type == "Text"
+    ) {
+      text = document.selection.createRange().text;
+    }
+    return text;
+  }
+
+  document.onmouseup = doSomethingWithSelectedText;
+  document.onkeyup = doSomethingWithSelectedText;
+
+  function doSomethingWithSelectedText() {
+    var selectedText = getSelectedText();
+    if (selectedText) {
+      // alert("Got selected text " + selectedText);
+      text = document.getElementById("problem");
+      var x = 0;
+      var y = 0;
+      text.addEventListener("mousemove", function (event) {
+        if ((x == 0) & (y == 0)) {
+          x = event.clientX;
+          y = event.clientY;
+          btn = get_highlight_btn(x, y);
+          btn.onclick = function () {
+            highlight(selectedText);
+            document.getElementById("problem").removeChild(btn);
+          };
+        } else {
+          return;
+        }
+      });
+      {
+        once: true;
+      }
+      // text.onmousemove = function () {};
+      // highlight(selectedText);
+    }
+  }
+
+  function get_highlight_btn(x, y) {
+    var btn = document.createElement("BUTTON");
+    btn.innerHTML = "add highlight";
+    c = document.getElementById("problem");
+    c.appendChild(btn);
+    btn.classList.add("entitybtn");
+    btn.id = "highlightbtn";
+    btn.style.position = "relative";
+    btn.style.left = x;
+    btn.style.top = y;
+    return btn;
+  }
+
+  function highlight(text) {
+    var inputText = document.getElementById("problem");
+    var innerHTML = inputText.innerHTML;
+    var index = innerHTML.indexOf(text);
+    if (index >= 0) {
+      innerHTML =
+        innerHTML.substring(0, index) +
+        "<span class='highlight'>" +
+        innerHTML.substring(index, index + text.length) +
+        "</span>" +
+        innerHTML.substring(index + text.length);
+      inputText.innerHTML = innerHTML;
+    }
+  }
+
   var oldVal = "";
   $(".notes").focus();
   $(".notes").on("change keyup paste", function ner_detection() {

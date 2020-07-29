@@ -54,7 +54,7 @@ body {
   padding-left: 2%;
 }
 
-.prob {
+.text {
   background-color: white;
   color: black;
   width: 100%;
@@ -73,14 +73,18 @@ body {
   width: 90%;
 }
 
-.explain {
+.highlight {
+  background-color: yellow;
+}
+
+/* .explain {
   background-color: white;
   color: black;
   width: 100%;
   font-family: "Roboto";
   font-size: 18px;
   text-align: left;
-}
+} */
 
 .container {
   width: 23.5%;
