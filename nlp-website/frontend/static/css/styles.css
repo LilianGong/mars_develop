@@ -132,22 +132,19 @@ body {
   color: white;
 }
 
-.highlightbtn {
+#highlightbtn {
+  position: absolute;
   background-color: white;
   color: black;
   border-radius: 5px;
-  /* margin: 5px; */
   transition-duration: 0.4s;
   border-color: #4f8a8b;
   font-size: 14px;
   font-family: "Roboto";
-  width: 20%;
-  height: 10%;
 }
-
-.highlightbtn:hover {
+#highlightbtn:hover {
   background-color: #4f8a8b;
-  /* color: white; */
+  color: white;
 }
 
 .defbox {
@@ -155,7 +152,7 @@ body {
   color: black;
   text-align: left;
   font-size: 14px;
-  /* margin: 5px; */
+  margin: 5px;
 }
 
 .para {

@@ -13,9 +13,13 @@ $(document).ready(function () {
   }
 
   text = document.getElementById("problem");
+  var position = text.getBoundingClientRect();
+  var px = position.left;
+  var py = position.top;
+
   text.addEventListener("mouseup", function () {
     highlighting();
-    text.removeEventListener("mouseup", arguments.callee);
+    // text.removeEventListener("mouseup", arguments.callee);
   });
 
   // document.onmouseup = doSomethingWithSelectedText;
@@ -24,13 +28,14 @@ $(document).ready(function () {
   function highlighting() {
     var selectedText = getSelectedText();
     if (selectedText) {
-      // text = document.getElementById("problem");
       var x = 0;
       var y = 0;
       text.addEventListener("mousemove", function () {
         if ((x == 0) & (y == 0)) {
-          x = event.screenX;
-          y = event.screenY;
+          x = event.pageX - px - 15;
+          y = event.pageY - py + 20;
+          console.log(x - px);
+          console.log(y - py);
           text.removeEventListener("mousermove", arguments.callee);
           btn = get_highlight_btn(x, y);
           btn.onclick = function () {
@@ -48,15 +53,11 @@ $(document).ready(function () {
     btn.innerHTML = "highlight";
     c = document.getElementById("htext");
     c.appendChild(btn);
-    btn.classList.add("highlightbtn");
     btn.id = "highlightbtn";
-    btn.style.position = "absolute";
     console.log(x);
     console.log(y);
-    btn.style.left = x;
-    btn.style.top = y;
-    // btn.style.right = x + 5 + "px";
-    // btn.style.bottom = x + 5 + "px";
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
     return btn;
   }
 
