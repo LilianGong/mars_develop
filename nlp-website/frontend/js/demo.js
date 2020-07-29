@@ -12,34 +12,34 @@ $(document).ready(function () {
     return text;
   }
 
-  document.onmouseup = doSomethingWithSelectedText;
-  document.onkeyup = doSomethingWithSelectedText;
+  text = document.getElementById("problem");
+  text.addEventListener("mouseup", function () {
+    highlighting();
+    text.removeEventListener("mouseup", arguments.callee);
+  });
 
-  function doSomethingWithSelectedText() {
+  // document.onmouseup = doSomethingWithSelectedText;
+  // document.onkeyup = doSomethingWithSelectedText;
+
+  function highlighting() {
     var selectedText = getSelectedText();
     if (selectedText) {
-      // alert("Got selected text " + selectedText);
-      text = document.getElementById("problem");
+      // text = document.getElementById("problem");
       var x = 0;
       var y = 0;
-      text.addEventListener("mousemove", function (event) {
+      text.addEventListener("mousemove", function () {
         if ((x == 0) & (y == 0)) {
-          x = event.clientX;
-          y = event.clientY;
+          x = event.pageX;
+          y = event.pageY;
+          text.removeEventListener("mousermove", arguments.callee);
           btn = get_highlight_btn(x, y);
           btn.onclick = function () {
             highlight(selectedText);
-            document.getElementById("problem").removeChild(btn);
+            c = document.getElementById("problem");
+            c.removeChild(btn);
           };
-        } else {
-          return;
         }
       });
-      {
-        once: true;
-      }
-      // text.onmousemove = function () {};
-      // highlight(selectedText);
     }
   }
 
@@ -48,11 +48,13 @@ $(document).ready(function () {
     btn.innerHTML = "add highlight";
     c = document.getElementById("problem");
     c.appendChild(btn);
-    btn.classList.add("entitybtn");
+    // btn.classList.add("entitybtn");
     btn.id = "highlightbtn";
-    btn.style.position = "relative";
-    btn.style.left = x;
-    btn.style.top = y;
+    // btn.style.position = "relative";
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+    btn.style.right = x + 5 + "px";
+    btn.style.bottom = x + 5 + "px";
     return btn;
   }
 
