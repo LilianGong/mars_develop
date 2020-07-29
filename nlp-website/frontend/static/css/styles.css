@@ -178,3 +178,7 @@ a {
   line-height: 3;
   padding: 0px;
 }
+
+#highlightbtn {
+  position: absolute;
+}

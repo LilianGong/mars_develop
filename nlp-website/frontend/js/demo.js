@@ -13,6 +13,10 @@ $(document).ready(function () {
   }
 
   text = document.getElementById("problem");
+  var position = text.getBoundingClientRect();
+  var px = position.left;
+  var py = position.top;
+
   text.addEventListener("mouseup", function () {
     highlighting();
     text.removeEventListener("mouseup", arguments.callee);
@@ -29,14 +33,16 @@ $(document).ready(function () {
       var y = 0;
       text.addEventListener("mousemove", function () {
         if ((x == 0) & (y == 0)) {
-          x = event.pageX;
-          y = event.pageY;
+          x = event.pageX - px;
+          y = event.pageY - py - 15;
+          console.log(x - px);
+          console.log(y - py);
           text.removeEventListener("mousermove", arguments.callee);
           btn = get_highlight_btn(x, y);
           btn.onclick = function () {
             highlight(selectedText);
             c = document.getElementById("problem");
-            c.removeChild(btn);
+            c.removeChild(c.lastElementChild);
           };
         }
       });
@@ -47,14 +53,16 @@ $(document).ready(function () {
     var btn = document.createElement("BUTTON");
     btn.innerHTML = "add highlight";
     c = document.getElementById("problem");
-    c.appendChild(btn);
     // btn.classList.add("entitybtn");
     btn.id = "highlightbtn";
     // btn.style.position = "relative";
     btn.style.left = x + "px";
     btn.style.top = y + "px";
-    btn.style.right = x + 5 + "px";
-    btn.style.bottom = x + 5 + "px";
+    // btn.style.right = x + 5 + "px";
+    // btn.style.bottom = x + 5 + "px";
+
+    c.appendChild(btn);
+
     return btn;
   }
 
