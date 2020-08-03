@@ -93,6 +93,7 @@ body {
 }
 
 .note_container {
+  padding-top: 4px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -184,8 +185,13 @@ body {
 }
 
 .commentbtn {
+  width: 35%;
+  border:none;
   cursor: pointer;
-  background: url(comment.png);
+  background: url(comment_icon.png);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .defbox {
@@ -238,4 +244,8 @@ a:visited {
   outline: none;
   font-size: 14px;
   line-height: 1.6;
+}
+
+::selection {
+  background: #f3f3f3;
 }

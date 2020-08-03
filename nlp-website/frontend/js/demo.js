@@ -22,6 +22,7 @@ $(document).ready(function () {
   // document.onmouseup = doSomethingWithSelectedText;
   // document.onkeyup = doSomethingWithSelectedText;
 
+  var old_text = ""
   function highlighting() {
     var selectedText = getSelectedText();
     if (selectedText) {
@@ -36,11 +37,19 @@ $(document).ready(function () {
           y = event.pageY - py;
           text.removeEventListener("mousermove", arguments.callee);
           hcbtn = get_highlight_btn(x, y);
-          get_highlight(selectedText, hcbtn[0]);
-          get_highlight(selectedText, hcbtn[1]);
-          get_highlight(selectedText, hcbtn[2]);
-          get_highlight(selectedText, hcbtn[3]);
-          show_note_area(selectedText, hcbtn[4], y);
+          a = get_highlight(selectedText, hcbtn[0]);
+          b = get_highlight(selectedText, hcbtn[1]);
+          c = get_highlight(selectedText, hcbtn[2]);
+          d = get_highlight(selectedText, hcbtn[3]);
+          e = show_note_area(selectedText, hcbtn[4], y);
+          console.log(old_text);
+          console.log(selectedText);
+            // if (old_text!=selectedText) {
+            //   var hbtn = document.getElementById('hbtn_box');
+            //   var parent = hbtn.parentNode;
+            //   parent.removeChild(hbtn);
+            // }
+          old_text = selectedText;
         }
       });
     }
@@ -131,7 +140,7 @@ $(document).ready(function () {
     setTimeout(function () {
       el.style.cssText = "height:auto; padding:0";
       el.style.cssText = "height:" + el.scrollHeight + "px";
-    }, 0);
+    }, 5);
   }
 
   function show_note_area(text, button, y) {
