@@ -32,8 +32,8 @@ $(document).ready(function () {
           var position = text.getBoundingClientRect();
           var px = position.left;
           var py = position.top;
-          x = event.pageX - px - 100;
-          y = event.pageY - py + 14;
+          x = event.pageX - px;
+          y = event.pageY - py;
           text.removeEventListener("mousermove", arguments.callee);
           hcbtn = get_highlight_btn(x, y);
           get_highlight(selectedText, hcbtn[0]);
@@ -92,8 +92,8 @@ $(document).ready(function () {
 
     console.log(x);
     console.log(y);
-    div.style.left = x + "px";
-    div.style.top = y + "px";
+    div.style.left = x - 100 + "px";
+    div.style.top = y + 14 + "px";
     hcbtn = [ybtn, bbtn, rbtn, gbtn, cbtn, div];
     return hcbtn;
   }
@@ -113,8 +113,12 @@ $(document).ready(function () {
         "</span>" +
         innerHTML.substring(index + text.length);
       inputText.innerHTML = innerHTML;
-      var color = getComputedStyle(elm).backgroundColor;
-      console.log(color);
+      if (elm != "none") {
+        var color = getComputedStyle(elm).backgroundColor;
+      } else {
+        var color = "#ffc400";
+      }
+
       document.getElementById(_id).style.backgroundColor = color;
       document.getElementById(_id).style.opacity = "0.5";
     }
@@ -132,23 +136,42 @@ $(document).ready(function () {
 
   function show_note_area(text, button, y) {
     button.onclick = function () {
+      // create note container
+      var n_container = document.createElement("div");
+      n_container.classList.add("note_container");
+      n_container.id = "note_container".concat(n_count.toString());
+      document.getElementById("container").appendChild(n_container);
+      n_container.style.top = y + "px";
+
+      // create button container
       var div = document.createElement("div");
       div.classList.add("btn_container");
       div.id = "btn_container".concat(n_count.toString());
-      document.getElementById("container").appendChild(div);
-      div.style.top = y + "px";
-      n_count += 1;
+      n_container.appendChild(div);
 
+      // create note text area
       var note = document.createElement("textarea");
-      var parent = "btn_container".concat((n_count - 1).toString());
-      document.getElementById(parent).append(note);
+      var parent = "btn_container".concat(n_count.toString());
+      document.getElementById(parent).appendChild(note);
       note.classList.add("notes");
-      note.id = "notes".concat((n_count - 1).toString());
+      note.id = "notes".concat(n_count.toString());
       note.placeholder = "Type your thoughts about it...";
       var oldVal = "";
       c = document.getElementById("htext");
       c.removeChild(hcbtn[5]);
-      highlight(text, hcbtn[0]);
+      console.log(getComputedStyle(hcbtn[0]).backgroundColor);
+      highlight(text, "none");
+
+      // create line area
+      var line = document.createElement("box");
+      document.getElementById("clickable_container").appendChild(line);
+      line.classList.add("lines");
+      line.id = "line".concat(n_count.toString());
+      var rect = note.getBoundingClientRect();
+      line.style.top = y + "px";
+      line.style.left = rect.right + "px";
+
+      n_count += 1;
 
       $(".notes").focus();
       var note = document.getElementById(
@@ -212,7 +235,9 @@ $(document).ready(function () {
           var tbn_container = document.createElement("div");
           tbn_container.classList.add("btn_container");
           tbn_container.id = "tbn_container";
-          document.getElementById("container").appendChild(tbn_container);
+          document
+            .getElementById("note_container".concat((n_count - 1).toString()))
+            .appendChild(tbn_container);
           var txt = next_textarea();
           at_teacher();
         };
@@ -236,7 +261,9 @@ $(document).ready(function () {
   function show_def(def) {
     var box = document.createElement("BOX");
     box.innerHTML = def;
-    document.getElementById("container").appendChild(box);
+    document
+      .getElementById("note_container".concat((n_count - 1).toString()))
+      .appendChild(box);
     box.classList.add("defbox");
   }
 
@@ -265,7 +292,9 @@ $(document).ready(function () {
           document.getElementById("tbn_container").removeChild(btn);
           show_at_teacher();
           var txt = document.createElement("TEXTAREA");
-          document.getElementById("container").appendChild(txt);
+          document
+            .getElementById("note_container".concat((n_count - 1).toString()))
+            .appendChild(txt);
           // txt.classList.add("next_notes");
           txt.id = "note_2";
           txt.rows = 1;
