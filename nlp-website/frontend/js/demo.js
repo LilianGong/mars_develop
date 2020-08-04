@@ -41,7 +41,7 @@ $(document).ready(function () {
           b = get_highlight(selectedText, hcbtn[1]);
           c = get_highlight(selectedText, hcbtn[2]);
           d = get_highlight(selectedText, hcbtn[3]);
-          e = show_note_area(selectedText, hcbtn[4], y);
+          e = show_note_area(selectedText, hcbtn[4], event.pageX,y);
           console.log(old_text);
           console.log(selectedText);
             // if (old_text!=selectedText) {
@@ -102,7 +102,7 @@ $(document).ready(function () {
     console.log(x);
     console.log(y);
     div.style.left = x - 100 + "px";
-    div.style.top = y + 14 + "px";
+    div.style.top = y + 25 + "px";
     hcbtn = [ybtn, bbtn, rbtn, gbtn, cbtn, div];
     return hcbtn;
   }
@@ -124,12 +124,14 @@ $(document).ready(function () {
       inputText.innerHTML = innerHTML;
       if (elm != "none") {
         var color = getComputedStyle(elm).backgroundColor;
+        console.log(color)
+
       } else {
         var color = "#ffc400";
       }
 
       document.getElementById(_id).style.backgroundColor = color;
-      document.getElementById(_id).style.opacity = "0.5";
+      // document.getElementById(_id).style.opacity = "0.5";
     }
   }
 
@@ -143,14 +145,16 @@ $(document).ready(function () {
     }, 5);
   }
 
-  function show_note_area(text, button, y) {
+  function show_note_area(text, button, x, y) {
     button.onclick = function () {
       // create note container
+      var img_container = document.createElement("div");
+      img_container.classList.add('gp_container')
       var n_container = document.createElement("div");
       n_container.classList.add("note_container");
       n_container.id = "note_container".concat(n_count.toString());
       document.getElementById("container").appendChild(n_container);
-      n_container.style.top = y + "px";
+      n_container.style.top = y + 45 + "px";
 
       // create button container
       var div = document.createElement("div");
@@ -172,13 +176,18 @@ $(document).ready(function () {
       highlight(text, "none");
 
       // create line area
-      var line = document.createElement("box");
-      document.getElementById("clickable_container").appendChild(line);
-      line.classList.add("lines");
-      line.id = "line".concat(n_count.toString());
-      var rect = note.getBoundingClientRect();
-      line.style.top = y + "px";
-      line.style.left = rect.right + "px";
+      // var line = document.createElement("box");
+      // document.getElementById("img_container").appendChild(line);
+      // line.classList.add("lines");
+      // line.id = "line".concat(n_count.toString());
+      // var rect = note.getBoundingClientRect();
+      //
+      // line.style.top = y + 115+"px";
+      // line.style.left = x - 100 +"px";
+      // // line.style.left = x + "px";
+      // console.log(rect.left)
+      // console.log(x)
+      // line.style.width = rect.left - x +85 + "px";
 
       n_count += 1;
 

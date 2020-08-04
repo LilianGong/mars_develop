@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+/*@import url(https://fonts.googleapis.com/css?family=Roboto);*/
 
 html {
   width: 100%;
@@ -13,7 +13,7 @@ body {
   color: black;
   font-size: 24px;
   text-align: center;
-  letter-spacing: 1.4px;
+  letter-spacing: 1px;
   overflow: scroll;
 }
 
@@ -58,9 +58,11 @@ body {
   background-color: white;
   color: black;
   width: 100%;
-  font-family: "Roboto";
+  font-family: "Avenir";
   font-size: 18px;
   text-align: left;
+  letter-spacing: 0.6px;
+  padding: 9px;
 }
 
 .graph {
@@ -117,12 +119,14 @@ body {
   color: black;
   resize: none;
   border: none;
-  font-family: "Roboto";
+  font-family: "Avenir";
   outline: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1;
+  letter-spacing: 0.6px;
+  padding: 9px;
 }
 
 .entitybtn {
@@ -131,8 +135,8 @@ body {
   /* margin: 5px; */
   transition-duration: 0.4s;
   border: none;
-  font-size: 14px;
-  font-family: "Roboto";
+  font-size: 18px;
+  font-family: "Avenir";
   width: 70%;
 }
 
@@ -156,8 +160,8 @@ body {
 } */
 
 .highlightbtn {
-  width: 13%;
-  height: 85%;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   margin-right: 10%;
   /* padding: 50%; */
@@ -199,25 +203,27 @@ body {
   background-color: white;
   color: black;
   text-align: left;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .para {
   background-color: white;
   color: black;
   text-align: left;
-  font-family: "Roboto";
-  font-size: 14px;
+  font-family: "Avenir";
+  font-size: 18px;
+  letter-spacing: 0.6px;
+  padding: 9px;
 }
 
 a {
   color: #5b70e7;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 a:visited {
   color: #5b70e7;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .next_notes {
@@ -228,10 +234,12 @@ a:visited {
   resize: none;
   background-color: white;
   color: black;
-  font-family: "Roboto";
+  font-family: "Avenir";
   outline: none;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.6;
+  letter-spacing: 0.6px;
+  padding: 9px;
 }
 
 #note_2 {
@@ -240,12 +248,14 @@ a:visited {
   resize: none;
   background-color: white;
   color: black;
-  font-family: "Roboto";
+  font-family: "Avenir";
   outline: none;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.6;
+  letter-spacing: 0.6px;
+  padding: 12px;
 }
 
 ::selection {
-  background: #f3f3f3;
+  background: #ACCEF7;
 }
