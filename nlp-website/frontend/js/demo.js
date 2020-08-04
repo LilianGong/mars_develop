@@ -102,7 +102,7 @@ $(document).ready(function () {
     console.log(x);
     console.log(y);
     div.style.left = x - 100 + "px";
-    div.style.top = y + 25 + "px";
+    div.style.top = y + 15 + "px";
     hcbtn = [ybtn, bbtn, rbtn, gbtn, cbtn, div];
     return hcbtn;
   }
@@ -124,14 +124,15 @@ $(document).ready(function () {
       inputText.innerHTML = innerHTML;
       if (elm != "none") {
         var color = getComputedStyle(elm).backgroundColor;
+        console.log(color.substring(0,color.length-1))
+        color = "rgba"+ color.substring(3,color.length-1) + ",0.5)"
         console.log(color)
 
       } else {
-        var color = "#ffc400";
+        var color = "rgba(255, 196, 0,0.5)";
       }
 
       document.getElementById(_id).style.backgroundColor = color;
-      // document.getElementById(_id).style.opacity = "0.5";
     }
   }
 
@@ -148,13 +149,15 @@ $(document).ready(function () {
   function show_note_area(text, button, x, y) {
     button.onclick = function () {
       // create note container
-      var img_container = document.createElement("div");
-      img_container.classList.add('gp_container')
+      var gp_container = document.createElement("div");
+      gp_container.classList.add('gp_container')
+      document.getElementById('container').appendChild(gp_container)
+
       var n_container = document.createElement("div");
       n_container.classList.add("note_container");
       n_container.id = "note_container".concat(n_count.toString());
-      document.getElementById("container").appendChild(n_container);
-      n_container.style.top = y + 45 + "px";
+      gp_container.appendChild(n_container);
+      gp_container.style.top = y + 23 + "px";
 
       // create button container
       var div = document.createElement("div");
@@ -164,8 +167,9 @@ $(document).ready(function () {
 
       // create note text area
       var note = document.createElement("textarea");
-      var parent = "btn_container".concat(n_count.toString());
-      document.getElementById(parent).appendChild(note);
+      // var parent = "btn_container".concat(n_count.toString());
+      // document.getElementById(parent)
+      div.appendChild(note);
       note.classList.add("notes");
       note.id = "notes".concat(n_count.toString());
       note.placeholder = "Type your thoughts about it...";
@@ -175,26 +179,36 @@ $(document).ready(function () {
       console.log(getComputedStyle(hcbtn[0]).backgroundColor);
       highlight(text, "none");
 
+
+      // add button images
+      var img_button = document.createElement('img')
+      img_button.src = "group.png";
+      gp_container.appendChild(img_button);
+      img_button.style.height = "48px";
+      img_button.style.padding = "15px 4px 4px 2px";
+
+
+
       // create line area
-      // var line = document.createElement("box");
-      // document.getElementById("img_container").appendChild(line);
-      // line.classList.add("lines");
-      // line.id = "line".concat(n_count.toString());
-      // var rect = note.getBoundingClientRect();
-      //
-      // line.style.top = y + 115+"px";
-      // line.style.left = x - 100 +"px";
-      // // line.style.left = x + "px";
-      // console.log(rect.left)
-      // console.log(x)
-      // line.style.width = rect.left - x +85 + "px";
+      var line = document.createElement("box");
+      document.getElementById("img_container").appendChild(line);
+      line.classList.add("lines");
+      line.id = "line".concat(n_count.toString());
+      var rect = note.getBoundingClientRect();
+
+      line.style.top = y + 93+"px";
+      line.style.left = x - 100 +"px";
+      // line.style.left = x + "px";
+      console.log(rect.left)
+      console.log(x)
+      line.style.width = rect.left - x +85 + "px";
 
       n_count += 1;
 
       $(".notes").focus();
-      var note = document.getElementById(
-        "notes".concat((n_count - 1).toString())
-      );
+      // var note = document.getElementById(
+      //   "notes".concat((n_count - 1).toString())
+      // );
       note.addEventListener("keydown", autosize);
 
       $(".notes").on("change keyup paste", function ner_detection() {
@@ -247,6 +261,7 @@ $(document).ready(function () {
       for (var key in res) {
         btn = get_button(key);
         btn.onclick = function () {
+          document.getElementById("notes0").style.height="28px";
           show_def(res[key]);
           btn.parentNode.removeChild(btn);
           // document.getElementById("btn_container").removeChild(btn);
